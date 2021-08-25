@@ -6,18 +6,20 @@ buildscript {
 
     dependencies {
         classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
-        //classpath("org.springframework.boot:spring-boot-gradle-plugin:2.4.5")
+//        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.4.5")
     }
 }
 
-allprojects { project ->
-
-    group "com.github.peacetrue.template"
+allprojects {
+    group "com.github.peacetrue.samples.https"
     version "1.0.0-SNAPSHOT"
-    description "gradle模板"
+    description "tomcat 配置 https"
 
     apply plugin: "java"
     apply plugin: "java-library"
+
+    sourceCompatibility = 8
+    targetCompatibility = 8
 
     repositories {
         mavenLocal()
@@ -25,8 +27,8 @@ allprojects { project ->
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
 
-//    apply plugin: 'org.springframework.boot'
     apply plugin: "io.spring.dependency-management"
+//    apply plugin: 'org.springframework.boot'
     dependencyManagement {
         imports {
             mavenBom "com.github.peacetrue:peacetrue-dependencies:2.0.0-SNAPSHOT"
@@ -37,6 +39,11 @@ allprojects { project ->
         compileOnly "org.projectlombok:lombok"
         annotationProcessor "org.projectlombok:lombok"
         implementation "com.google.code.findbugs:jsr305"
+        implementation "ch.qos.logback:logback-classic"
+
+        compileOnly "org.springframework:spring-web"
+        compileOnly "org.springframework:spring-context"
+        compileOnly "org.springframework.boot:spring-boot-autoconfigure"
 
         testImplementation 'org.junit.jupiter:junit-jupiter-api'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
@@ -47,7 +54,7 @@ allprojects { project ->
         testCompileOnly "org.projectlombok:lombok"
         testAnnotationProcessor "org.projectlombok:lombok"
         testImplementation "ch.qos.logback:logback-classic"
-        testImplementation 'io.projectreactor:reactor-test'
+        testImplementation 'org.springframework:spring-web'
         testImplementation 'org.unitils:unitils-core'
         testImplementation 'org.jeasy:easy-random-core'
         testImplementation 'org.yaml:snakeyaml'
@@ -59,4 +66,5 @@ allprojects { project ->
     test {
         useJUnitPlatform()
     }
+
 }

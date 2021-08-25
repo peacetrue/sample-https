@@ -1,9 +1,10 @@
-name: peacetrue-template-gradle
-title: gradle 模板项目
+name: sample-https
+title: https 相关
 version: master
 asciidoc:
   attributes:
     numbered: '@'
+    source_options: '%nowrap@'
 start_page: ROOT:index.adoc
 nav:
   - modules/ROOT/nav.adoc
